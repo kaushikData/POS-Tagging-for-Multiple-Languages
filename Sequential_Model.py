@@ -146,5 +146,22 @@ class SequenceModel(object):
 
         return True
 
+    def evaluate (self,test_terms, test_tags, test_lengths):
+        
+        len = test_terms.shape[0]
+
+        indices = numpy.random.permutation(len)
+
+        for start in range(0, len, batch_size):
+            last = min(len, start + batch_size)
+
+            bat_x = test_terms[indices[start:last]] + 0
+            bat_y = test_tags[indices[start:last]] + 0
+            bat_z = test_lengths[indices[start:last]] + 0
+            predict = run_inference(self, bat_x, bat_z)
+      
+            
+        
+        
 
   
